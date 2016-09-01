@@ -10,7 +10,8 @@ import io.dropwizard.client.HttpClientBuilder;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import test.resources.ExternalUserResourceService;
-import test.resources.UserResource;
+import test.resources.FastUserResource;
+import test.resources.SlowUserResource;
 
 public class DropwizardApplication extends Application<DropwizardConfiguration> {
 
@@ -33,8 +34,9 @@ public class DropwizardApplication extends Application<DropwizardConfiguration> 
     	final HttpClient httpClient = new HttpClientBuilder(environment).using(config.getHttpClientConfiguration()).build("httpClient");
     	final ObjectMapper objectMapper = new ObjectMapper();
     	final ExternalUserResourceService userService = new ExternalUserResourceService(httpClient, objectMapper);
-    	final UserResource userSevice = new UserResource(userService);
-        environment.jersey().register(userSevice);
+
+    	environment.jersey().register(new SlowUserResource(userService));
+    	environment.jersey().register(new FastUserResource(userService));
     }
 
 }

@@ -25,8 +25,8 @@ public class ExternalUserResourceService {
 		this.httpClient = httpClient;
 		this.mapper = mapper;
 		try {
-			FAST_ENDPOINT =  new URI("http://178.62.44.175:9999/fast-user");
-			SLOW_ENDPOINT =  new URI("http://178.62.44.175:9999/slow-user");
+			FAST_ENDPOINT =  new URI("http://178.62.44.175:9999/fast-endpoint");
+			SLOW_ENDPOINT =  new URI("http://178.62.44.175:9999/slow-endpoint");
 		} catch (URISyntaxException e) {
 			throw new RuntimeException(e);
 		}
